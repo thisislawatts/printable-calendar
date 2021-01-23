@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8">
+
+    <style>#PDFPreview {
+        width: 50%;
+      }</style>
+  <link rel="stylesheet" href="/src.f10117fe.css"></head>
+
+  <body>
+    <div style="display: flex; height: calc(100vh - 20px);">
+      <div style="padding-right: 2em;" x-data="window.initUi()">
+        <h1>Printable 2021 Calendar</h1>
+
+        <div>
+          Paper format:
+          <select x-model="selectedPaperSize" @change="update">
+            <template x-for="item in paperSizes" :key="item">
+              <option x-text="item" x-bind:value="item"></option>
+            </template>
+          </select>
+        </div>
+        <hr>
+        <div>
+          Starting month
+        </div>
+        <div>
+          Number of months:
+          <button @click="updateNumericValue('numberOfMonths',-1)">
+            -
+          </button>
+          <span x-html="numberOfMonths"></span>
+          <button @click="updateNumericValue('numberOfMonths',1)">
+            +
+          </button>
+        </div>
+
+        <div>
+          <label for="">Title Size</label>
+          <button @click="updateNumericValue('titleSizing', -1)">
+            -
+          </button>
+          <span x-html="titleSizing"></span>pt
+          <button @click="updateNumericValue('titleSizing', 1)">
+            +
+          </button>
+        </div>
+
+        <div>
+          <label for="">Heading Size</label>
+          <button @click="updateNumericValue('headingSizing', -1)">
+            -
+          </button>
+          <span x-html="headingSizing"></span>pt
+          <button @click="updateNumericValue('headingSizing', 1)">
+            +
+          </button>
+        </div>
+
+        <div>
+          <label for="">Heading Length</label>
+          <button @click="updateNumericValue('headingLength', -1)">
+            -
+          </button>
+          <span x-html="headingLength"></span> characters
+          <button @click="updateNumericValue('headingLength', 1)">
+            +
+          </button>
+        </div>
+
+        <div>
+          <label for="">Numerals Size</label>
+          <button @click="updateNumericValue('numeralSizing', -1)">
+            -
+          </button>
+          <span x-html="numeralSizing"></span>pt
+          <button @click="updateNumericValue('numeralSizing', 1)">
+            +
+          </button>
+        </div>
+
+        <div>
+          <label for="">Stroke Size</label>
+          <button @click="updateNumericValue('strokeSizing', -1)">
+            -
+          </button>
+          <span x-html="strokeSizing"></span>pt
+          <button @click="updateNumericValue('strokeSizing', 1)">
+            +
+          </button>
+        </div>
+
+        <button id="PDFDownload">Download PDF</button>
+      </div>
+      <div id="PDFPreview"></div>
+    </div>
+
+    <script src="/src.f10117fe.js"></script>
+    <script>console.log("Example:", window.initUi);</script>
+  </body>
+</html>
