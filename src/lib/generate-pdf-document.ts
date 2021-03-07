@@ -7,11 +7,11 @@ export const PdfDocumentDefaultSettings = {
   headingSizing: 10,
   headingLength: 3,
   numeralSizing: 10,
-  strokeSizing: 1
+  strokeSizing: 1,
 };
 
-export function renderPdfDocument(calender, options) {
-  let doc;
+export function renderPdfDocument(calender, options, settingsVector: string) {
+  let doc: any;
 
   const {
     sheetSize,
@@ -19,10 +19,10 @@ export function renderPdfDocument(calender, options) {
     headingSizing,
     numeralSizing,
     headingLength,
-    strokeSizing
+    strokeSizing,
   } = {
     ...PdfDocumentDefaultSettings,
-    ...options
+    ...options,
   };
 
   const TABLE_X = 10;
@@ -39,7 +39,7 @@ export function renderPdfDocument(calender, options) {
     if (!doc) {
       doc = new jsPDF({
         format: sheetSize.toLowerCase(),
-        unit: "mm"
+        unit: "mm",
       });
     } else {
       doc.addPage();
@@ -51,14 +51,14 @@ export function renderPdfDocument(calender, options) {
 
     // Weekday Headings
     doc.setFontSize(headingSizing);
-    calender.weekdayHeadings.forEach((day, idx) => {
+    calender.weekdayHeadings.forEach((day: string, idx: number) => {
       let x = TABLE_X + idx * COLUMN_WIDTH;
       doc.text(
         day.slice(0, headingLength),
         x + CELL_PADDING,
         TABLE_Y - CELL_PADDING * 1.2,
         {
-          align: "left"
+          align: "left",
         }
       );
     });
@@ -68,17 +68,19 @@ export function renderPdfDocument(calender, options) {
     let rowCount = 1;
     let itemsOnLastRow = 0;
 
+    // Numerals
     doc.setFontSize(numeralSizing);
-    days.forEach((day, idx) => {
-      if (day.isCurrentMonth)
-        doc.text(day.dayOfMonth + "", x + CELL_PADDING, y - CELL_PADDING * 1.2);
-      else {
-        // Not the current month
+    days.forEach((day: any, idx: number) => {
+      if (!day.isCurrentMonth) {
         doc.setLineDashPattern([1, 2]);
         doc.line(x, y - ROW_HEIGHT, x + COLUMN_WIDTH, y);
         doc.setLineDashPattern();
-        doc.text(day.dayOfMonth + "", x + CELL_PADDING, y - CELL_PADDING * 1.2);
       }
+      doc.text(
+        day.dayOfMonth + "",
+        x + CELL_PADDING,
+        y - (ROW_HEIGHT - CELL_PADDING * 3.5)
+      );
 
       if (idx && (idx + 1) % 7 === 0) {
         x = TABLE_X;
@@ -111,6 +113,10 @@ export function renderPdfDocument(calender, options) {
         TABLE_Y + ROW_HEIGHT * numberOfRowsToLine
       );
     }
+
+    // Add attribution link
+    doc.setFontSize(8);
+    doc.text(settingsVector, TABLE_X, SHEET_DIMENSIONS[1] - 8);
   });
 
   return doc;

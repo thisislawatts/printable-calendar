@@ -1,13 +1,13 @@
 import dayjs from "dayjs";
-const langNl = require("dayjs/locale/nl");
-const localeData = require("dayjs/plugin/localeData");
-const weekOfYear = require("dayjs/plugin/weekOfYear");
+import langNl from "dayjs/locale/nl";
+import localeData from "dayjs/plugin/localeData";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 
 dayjs.locale("nl");
 dayjs.extend(localeData);
 dayjs.extend(weekOfYear);
 
-function capitalize(str) {
+function capitalize(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1);
 }
 
@@ -15,7 +15,7 @@ function getWeekday(date) {
   return dayjs(date).day();
 }
 
-function getNumberOfDaysInMonth(year, month) {
+function getNumberOfDaysInMonth(year:string, month:string) {
   return dayjs(`${year}-${month}-01`).daysInMonth();
 }
 
