@@ -1,5 +1,9 @@
 import App from "./App.svelte";
 
-new App({
-  target: document.querySelector('#App'),
-});
+const target = document.querySelector("#App");
+
+if (target) {
+  new App({
+    target,
+  });
+}

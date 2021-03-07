@@ -21,14 +21,17 @@
 
   let doc;
 
-  location.search
-    .replace("?", "")
-    .split(":")
-    .map((propertyValue) => {
-      const [prop, val] = propertyValue.match(/[a-z]+|\d+/g);
+  if (location.search) {
+    location.search
+      .replace("?", "")
+      .split(":")
+      .map((propertyValue) => {
+        console.log({ propertyValue });
+        const [prop, val] = propertyValue.match(/[a-z]+|\d+/g);
 
-      if (prop && val) state[prop] = val;
-    });
+        if (prop && val) state[prop] = val;
+      });
+  }
 
   let settingsVector;
   $: {
@@ -60,7 +63,7 @@
         headingLength: state.hl,
         strokeSizing: state.ss,
       },
-      settingsVector,
+      settingsVector
     );
 
     history.pushState(settingsVector, "Updated", `?${settingsVector}`);
@@ -95,8 +98,8 @@
     </div>
 
     <InputQty bind:value={state.nm} label="Number of Months" />
-    <InputQty bind:value={state.ts} label="Title size" unit="pt" />
-    <InputQty bind:value={state.hs} label="Heading size" unit="pt" />
+    <InputQty bind:value={state.ts} label="Month type size" unit="pt" />
+    <InputQty bind:value={state.hs} label="Weekday size" unit="pt" />
     <InputQty bind:value={state.hl} label="Heading length" />
     <InputQty bind:value={state.ns} label="Numerals Size" unit="pt" />
 

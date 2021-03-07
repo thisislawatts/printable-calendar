@@ -115,7 +115,7 @@ export function renderPdfDocument(calender, options, settingsVector: string) {
     }
 
     // Add attribution link
-    doc.setFontSize(10);
+    doc.setFontSize(8);
     doc.text(settingsVector, TABLE_X, SHEET_DIMENSIONS[1] - 8);
   });
 
