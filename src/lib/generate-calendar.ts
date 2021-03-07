@@ -15,19 +15,19 @@ function getWeekday(date) {
   return dayjs(date).day();
 }
 
-function getNumberOfDaysInMonth(year:string, month:string) {
+function getNumberOfDaysInMonth(year: string, month: string) {
   return dayjs(`${year}-${month}-01`).daysInMonth();
 }
 
 function createDaysForMonth(year, month, isCurrentMonth = false) {
-  const days = [];
+  const days: any[] = [];
 
   for (let index = 0; index < getNumberOfDaysInMonth(year, month); index++) {
     const date = dayjs(`${year}-${month}-${index + 1}`);
     days.push({
       date: date.format("YYYY-MM-DD"),
       dayOfMonth: date.format("D"),
-      isCurrentMonth
+      isCurrentMonth,
     });
   }
 
@@ -82,17 +82,22 @@ function getDaysForSingleSheet(year, month) {
     ...nextMonthDays.slice(
       0,
       42 - (previousMonthDays.length + currentMonthDays.length)
-    )
+    ),
   ];
+}
+
+interface Month {
+  title: string;
+  days: any[];
 }
 
 export function generateCalendar(
   startingYear: number,
   startingMonth: number,
   numberOfMonths: number
-) {
+): { weekdayHeadings: string[]; months: Month[] } {
   let selectedMonth = dayjs(new Date(startingYear, startingMonth - 1, 1));
-  const months = [];
+  const months: Month[] = [];
   let i = 0;
 
   while (i < numberOfMonths) {
@@ -102,7 +107,7 @@ export function generateCalendar(
       days: getDaysForSingleSheet(
         selectedMonth.format("YYYY"),
         selectedMonth.format("M")
-      )
+      ),
     });
 
     selectedMonth = dayjs(selectedMonth).add(1, "month");
@@ -110,10 +115,13 @@ export function generateCalendar(
   }
 
   return {
-    weekdayHeadings: [
-      ...Array.from(langNl.weekdays).slice(1),
-      ...Array.from(langNl.weekdays).slice(0, 1)
-    ].map(capitalize),
-    months
+    weekdayHeadings: getWeekdayHeadings(),
+    months,
   };
+}
+
+function getWeekdayHeadings(): string[] {
+  return langNl.weekdays
+    ? [...langNl.weekdays.slice(1), ...langNl.weekdays.slice(0, 1)]
+    : [];
 }

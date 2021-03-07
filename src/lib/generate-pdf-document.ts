@@ -2,15 +2,29 @@ import { jsPDF } from "jspdf";
 import { papersizes } from "./paper-sizes";
 import { generateCalendar } from "./generate-calendar";
 
+interface PdfDocumentSettings {
+  titleSizing: number;
+  headingSizing: number;
+  headingLength: number;
+  numeralSizing: number;
+  strokeSizing: number;
+  sheetSize: string;
+}
+
 export const PdfDocumentDefaultSettings = {
   titleSizing: 10,
   headingSizing: 10,
   headingLength: 3,
   numeralSizing: 10,
   strokeSizing: 1,
+  sheetSize: "A4",
 };
 
-export function renderPdfDocument(calender, options, settingsVector: string) {
+export function renderPdfDocument(
+  calender,
+  options: PdfDocumentSettings,
+  settingsVector: string
+) {
   let doc: any;
 
   const {
