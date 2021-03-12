@@ -131,7 +131,7 @@ export function renderPdfDocument(
     // Add attribution link
     doc.setFontSize(8);
     doc.text(
-      `https://calendar.thisis.la/${settingsVector}`,
+      `https://calendar.thisis.la/?${settingsVector}`,
       TABLE_X,
       SHEET_DIMENSIONS[1] - 8
     );
