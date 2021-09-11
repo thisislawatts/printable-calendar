@@ -18,4 +18,7 @@
 
 <style>
   /* your styles go here */
+  div {
+    margin-bottom: 0.5em;
+  }
 </style>

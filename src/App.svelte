@@ -74,9 +74,10 @@
 </script>
 
 <div class="app">
-  <div>
+  <div class="controls">
     <h1>Printable {new Date().getFullYear()} Calendar</h1>
-    <div>
+
+    <div class="controls__group">
       Paper format:
 
       {state.ps}
@@ -87,7 +88,7 @@
       </select>
     </div>
 
-    <div>
+    <div class="controls__group">
       Starting month:
       <select bind:value={state.sm}>
         {#each availableMonths as month, idx}
@@ -97,13 +98,19 @@
       </select>
     </div>
 
-    <InputQty bind:value={state.nm} label="Number of Months" />
-    <InputQty bind:value={state.ts} label="Month type size" unit="pt" />
-    <InputQty bind:value={state.hs} label="Weekday size" unit="pt" />
-    <InputQty bind:value={state.hl} label="Heading length" />
-    <InputQty bind:value={state.ns} label="Numerals Size" unit="pt" />
+    <div class="controls__group">
+      <InputQty bind:value={state.nm} label="Number of Months" />
+      <InputQty bind:value={state.ts} label="Month type size" unit="pt" />
+      <InputQty bind:value={state.ml} label="Month length" />
+    </div>
 
-    <div>
+    <div class="controls_group">
+      <InputQty bind:value={state.hs} label="Weekday type size" unit="pt" />
+      <InputQty bind:value={state.hl} label="Weekday length" />
+      <InputQty bind:value={state.ns} label="Numerals Size" unit="pt" />
+    </div>
+
+    <div class="controls__group">
       Numeral alignment Horizontal
       <div><label for="">Bottom<input type="radio" /></label></div>
     </div>
