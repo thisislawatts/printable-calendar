@@ -1,6 +1,6 @@
-# New Project
+# Printable Calendar
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2b3c476c-ebe0-418a-9bcb-0af8ab7c68ce/deploy-status)](https://app.netlify.com/sites/la-calendar/deploys)
 
 ## Available Scripts
 
