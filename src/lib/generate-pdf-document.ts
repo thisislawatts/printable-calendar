@@ -34,6 +34,7 @@ export function renderPdfDocument(
     numeralSizing,
     headingLength,
     strokeSizing,
+    monthLength,
   } = {
     ...PdfDocumentDefaultSettings,
     ...options,
@@ -61,7 +62,7 @@ export function renderPdfDocument(
 
     // Month title
     doc.setFontSize(titleSizing);
-    doc.text(title, TABLE_X, 40);
+    doc.text(title.slice(0, monthLength), TABLE_X, 40);
 
     // Weekday Headings
     doc.setFontSize(headingSizing);
@@ -109,6 +110,7 @@ export function renderPdfDocument(
     // Draw the horizontal lines
     // Header
     doc.setLineWidth(strokeSizing);
+
     // Horiontal lines
     for (let index = 0; index < rowCount - 1; index++) {
       let y = TABLE_Y + ROW_HEIGHT * index;

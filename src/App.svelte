@@ -8,6 +8,7 @@
 
   let state = {
     ps: 1, // Paper size
+    sy: new Date().getFullYear(), // Starting year
     sm: 1, // Starting month
     ts: 1, // Title Size
     hs: 12, // Heading Size
@@ -36,11 +37,7 @@
 
   let settingsVector;
   $: {
-    const calenderData = generateCalendar(
-      new Date().getFullYear(),
-      state.sm,
-      state.nm
-    );
+    const calenderData = generateCalendar(state.sy, state.sm, state.nm);
 
     settingsVector = [
       `ps${state.ps}`,
@@ -76,7 +73,10 @@
 
 <div class="app">
   <div class="controls">
-    <h1>Printable {new Date().getFullYear()} Calendar</h1>
+    <header>
+      <h1>Printable {state.sy} Calendar</h1>
+      <h2>One month per page</h2>
+    </header>
 
     <div class="controls__group">
       <InputSelect
@@ -114,19 +114,25 @@
     </div>
     <InputQty bind:value={state.ss} label="Stroke Size" unit="pt" />
 
-    <button on:click={() => doc.save("CalendarDownload.pdf")}>Download</button>
-    <footer>
-      {settingsVector}
-    </footer>
+    <button
+      class="bigolbutton"
+      on:click={() => doc.save("CalendarDownload.pdf")}>Download</button
+    >
   </div>
 
   {#if doc}
-    <embed
-      src={doc.output("datauristring")}
-      type="application/pdf"
-      heigth="100%"
-      width="100%"
-    />
+    <div class="wall">
+      <div class="sheet-wrapper">
+        <div class="sheet">
+          <embed
+            src={doc.output("datauristring")}
+            type="application/pdf"
+            heigth="100%"
+            width="100%"
+          />
+        </div>
+      </div>
+    </div>
   {/if}
 </div>
 
@@ -134,6 +140,19 @@
   /* css will go here */
   .app {
     display: flex;
-    height: calc(100vh - 20px);
+    height: calc(100vh);
+    justify-content: space-between;
+  }
+
+  .controls {
+    width: 34%;
+  }
+
+  .wall {
+    border-left: 1px solid hsla(28, 100%, 88%, 1);
+    background: peachpuff;
+    width: 66%;
+    display: flex;
+    justify-content: center;
   }
 </style>
