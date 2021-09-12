@@ -2,6 +2,7 @@
   import langNl from "dayjs/locale/nl";
   import { papersizes } from "./lib/paper-sizes";
   import InputQty from "./components/InputQty.svelte";
+  import InputSelect from "./components/InputSelect.svelte";
   import { generateCalendar } from "./lib/generate-calendar";
   import { renderPdfDocument } from "./lib/generate-pdf-document";
 
@@ -78,24 +79,21 @@
     <h1>Printable {new Date().getFullYear()} Calendar</h1>
 
     <div class="controls__group">
-      Paper format:
-
-      {state.ps}
-      <select bind:value={state.ps}>
-        {#each sheetSizeOptions as size, idx}
-          <option value={idx + 1} selected={state.ps == idx + 1}>{size}</option>
-        {/each}
-      </select>
+      <InputSelect
+        label="Paper format"
+        options={sheetSizeOptions}
+        bind:value={state.ps}
+      />
     </div>
 
     <div class="controls__group">
-      Starting month:
-      <select bind:value={state.sm}>
-        {#each availableMonths as month, idx}
-          <option value={idx + 1} selected={state.sm == idx + 1}>{month}</option
-          >
-        {/each}
-      </select>
+      <InputSelect
+        label="Starting month"
+        options={availableMonths}
+        bind:value={state.sm}
+      />
+
+      <InputQty bind:value={state.sy} label="Starting Year" />
     </div>
 
     <div class="controls__group">
