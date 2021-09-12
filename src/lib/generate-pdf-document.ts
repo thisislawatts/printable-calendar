@@ -17,7 +17,8 @@ export const PdfDocumentDefaultSettings = {
   headingLength: 3,
   numeralSizing: 10,
   strokeSizing: 1,
-  sheetSize: "A4",
+  monthLength: 25,
+  sheetSize: "A4"
 };
 
 export function renderPdfDocument(
