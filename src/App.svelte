@@ -64,10 +64,6 @@
       settingsVector
     );
 
-    if (window.fathom && window.fathom.trackGoal) {
-      window.fathom.trackGoal('XIKTOBZT', 0);
-    }
-
     history.pushState(settingsVector, "Updated", `?${settingsVector}`);
   }
 
@@ -121,9 +117,6 @@
     <button
       class="bigolbutton"
       on:click={() => {
-        if (window.fathom && window.fathom.trackGoal) {
-          window.fathom.trackGoal("P6MZR4BQ", 0);
-        }
         return doc.save("CalendarDownload.pdf");
       }}>Download</button
     >
