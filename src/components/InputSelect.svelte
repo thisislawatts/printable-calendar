@@ -1,17 +1,23 @@
 <script>
-  export let label;
-  export let value = 1;
-  export let options = [];
+	/**
+	 * @type {string}
+	 */
+	export let label;
+	export let value = 1;
+	/**
+	 * @type {string[]}
+	 */
+	export let options = [];
 </script>
 
 <div>
-  <label for="">{label}</label>
+	<label for={label}>{label}</label>
 
-  <select bind:value>
-    {#each options as label, idx}
-      <option value={idx + 1} selected={value == idx + 1}>{label}</option>
-    {/each}
-  </select>
+	<select name={label} id={label} bind:value>
+		{#each options as label, idx}
+			<option value={`${idx + 1}`}>{label}</option>
+		{/each}
+	</select>
 </div>
 
 <style>

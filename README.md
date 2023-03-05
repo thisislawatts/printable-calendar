@@ -1,24 +1,38 @@
-# Printable Calendar
+# create-svelte
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/2b3c476c-ebe0-418a-9bcb-0af8ab7c68ce/deploy-status)](https://app.netlify.com/sites/la-calendar/deploys)
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-## Available Scripts
+## Creating a project
 
-### npm start
+If you're seeing this, you've probably already done this step. Congrats!
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+```bash
+# create a new project in the current directory
+npm create svelte@latest
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+# create a new project in my-app
+npm create svelte@latest my-app
+```
 
-### npm run build
+## Developing
 
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-**For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.json` config file.
+```bash
+npm run dev
 
-### Q: What about Eject?
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
