@@ -65,7 +65,7 @@
     );
 
     if (window.fathom && window.fathom.trackGoal) {
-      window.fathom.trackGoal('XIKTOBZT', 0);
+      window.fathom.trackGoal("XIKTOBZT", 0);
     }
 
     history.pushState(settingsVector, "Updated", `?${settingsVector}`);

@@ -41,8 +41,8 @@ export function renderPdfDocument(
     ...options,
   };
 
-  const TABLE_X = 10;
-  const TABLE_Y = 60;
+  const TABLE_X = 4;
+  const TABLE_Y = 40;
   const SHEET_DIMENSIONS = papersizes[sheetSize.toUpperCase()].mm;
   const TABLE_W = SHEET_DIMENSIONS[0] - TABLE_X * 2;
   const COLUMN_WIDTH = TABLE_W / 7;
@@ -63,7 +63,7 @@ export function renderPdfDocument(
 
     // Month title
     doc.setFontSize(titleSizing);
-    doc.text(title.slice(0, monthLength), TABLE_X, 40);
+    doc.text(title.slice(0, monthLength), TABLE_X, 25);
 
     // Weekday Headings
     doc.setFontSize(headingSizing);
@@ -95,7 +95,7 @@ export function renderPdfDocument(
       doc.text(
         day.dayOfMonth + "",
         x + CELL_PADDING,
-        y - (ROW_HEIGHT - CELL_PADDING * 3.5)
+        y - (ROW_HEIGHT - CELL_PADDING * 3)
       );
 
       if (idx && (idx + 1) % 7 === 0) {
@@ -132,11 +132,11 @@ export function renderPdfDocument(
     }
 
     // Add attribution link
-    doc.setFontSize(8);
+    doc.setFontSize(6);
     doc.text(
       `https://calendar.thisis.la/?${settingsVector}`,
       TABLE_X,
-      SHEET_DIMENSIONS[1] - 8
+      SHEET_DIMENSIONS[1] - 2
     );
   });
 
